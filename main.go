@@ -10,8 +10,8 @@ import (
 )
 
 type Employee struct {
-	Id    int
-	Name  string
+	Id   int
+	Name string
 	City string
 }
 
@@ -20,7 +20,7 @@ func dbConn() (db *sql.DB) {
 	dbUser := "root"
 	dbPass := "Mysqlroot123"
 	dbName := "goblog"
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@tcp(192.168.3.14:3306)/"+dbName)
 	//db, err = gorm.Open("mysql", "root:Mysqlroot123@tcp(localhost:3306)/Football?charset=utf8&parseTime=True")
 	if err != nil {
 		panic(err.Error())
@@ -37,7 +37,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 	emp := Employee{}
-	res := []Employee{}//created struct to match byte code after unmarshal to display data
+	res := []Employee{} //created struct to match byte code after unmarshal to display data
 	for selDB.Next() {
 		var id int
 		var name, city string

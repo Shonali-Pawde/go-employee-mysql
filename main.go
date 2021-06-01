@@ -21,6 +21,7 @@ func dbConn() (db *sql.DB) {
 	dbPass := "Mysqlroot123"
 	dbName := "goblog"
 	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	//db, err = gorm.Open("mysql", "root:Mysqlroot123@tcp(localhost:3306)/Football?charset=utf8&parseTime=True")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -150,7 +151,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	log.Println("Server started on: http://localhost:8080")
+	log.Println("Server started on: http://localhost:8910")
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/show", Show)
 	http.HandleFunc("/new", New)
@@ -158,5 +159,5 @@ func main() {
 	http.HandleFunc("/insert", Insert)
 	http.HandleFunc("/update", Update)
 	http.HandleFunc("/delete", Delete)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8910", nil)
 }
